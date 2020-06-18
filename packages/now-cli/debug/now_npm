@@ -5,10 +5,10 @@ case `uname` in
     *CYGWIN*|*MINGW*|*MSYS*) basedir=`cygpath -w "$basedir"`;;
 esac
 
+#   "$basedir/node"  "$basedir/node_modules/now/dist/index.js" "$@"
+#   ret=$?
+# else 
 if [ -x "$basedir/node" ]; then
-  "$basedir/node"  "$basedir/node_modules/now/dist/index.js" "$@"
-  ret=$?
-else 
   node  "$basedir/node_modules/now/dist/index.js" "$@"
   ret=$?
 fi
