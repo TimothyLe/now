@@ -43,9 +43,11 @@ function getNowPath() {
     const { LOCALAPPDATA, USERPROFILE, HOMEPATH } = process.env;
     const home = homedir() || USERPROFILE || HOMEPATH;
     let path;
-    if (LOCALAPPDATA) {
-      path = join(LOCALAPPDATA, 'now-cli', 'now.exe');
-    } else if (home) {
+    // if (LOCALAPPDATA) {
+    //   path = join(LOCALAPPDATA, 'now-cli', 'now.exe');
+    // } else 
+    //TODO testing less npm clones
+    if (home) {
       path = join(home, 'AppData', 'Local', 'now-cli', 'now.exe');
     } else {
       path = '';
@@ -54,6 +56,7 @@ function getNowPath() {
   }
 
   const pathEnv = (process.env.PATH || '').split(delimiter);
+  console.log(pathEnv)
 
   const paths = [
     join(process.env.HOME || '/', 'bin'),
@@ -62,9 +65,10 @@ function getNowPath() {
   ];
 
   for (const basePath of paths) {
-    if (!pathEnv.includes(basePath)) {
-      continue;
-    }
+    //TODO investigate potential deadlock
+    // if (!pathEnv.includes(basePath)) {
+    //   continue;
+    // }
 
     const nowPath = join(basePath, 'now');
 
